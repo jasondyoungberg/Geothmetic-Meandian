@@ -51,11 +51,15 @@
 			}
 
 			function run(){
-				var nums = document.getElementById('nums').value.split(/[, \n]+/);
-				var n = nums.map(v => parseInt(v, 10));
-				var tries = parseInt(document.getElementById('tries').value, 10);
-				
-				document.getElementById('res').value = calc(n, tries)[0];
+				try {
+					var nums = document.getElementById('nums').value.split(/[, \n]+/);
+					var n = nums.map(v => parseInt(v, 10));
+					var tries = parseInt(document.getElementById('tries').value, 10);
+					
+					document.getElementById('res').value = calc(n, tries)[0];
+				} catch {
+					document.getElementById('res').value = 'error';
+				}
 			}
 		</script>
 		<h1>Geothmetic Meandian</h1>
@@ -68,6 +72,6 @@
 		<button onclick="run()">Calculate</button>
 		<br/>
 		<label for="res">Answer: </label>
-		<input id="res" type="number" readonly/>
+		<input id="res" type="text" readonly/>
 	</body>
 </html>
