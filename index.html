@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Geothmetic Meandian</title>
+	</head>
+	<body>
+		<script>
+			function geometric(nums) {
+				var product = 1;
+				for (var i = 0; i < nums.length; i++) {
+					product *= nums[i];
+				}
+				return Math.pow(product, 1 / nums.length);
+			}
+
+			function mean(nums) {
+				var total = 0;
+				for (var i = 0; i < nums.length; i++) {
+					total += nums[i];
+				}
+				return total / nums.length;
+			}
+
+			function median(nums) {
+				nums.sort()
+				mid = nums.length / 2;
+				if (nums.length % 2 == 0) {
+					return (nums[mid] + nums[mid - 1]) / 2;
+				} else {
+					return nums[mid - 0.5];
+				}
+			}
+
+			function geothmetic(nums) {
+				return [
+					geometric(nums),
+					mean(nums),
+					median(nums)
+				];
+			}
+
+			function calc(nums,times){
+				var n = nums;
+				for (var i = 0; i < times; i++){
+					n = geothmetic(n)
+				}
+				return n;
+			}
+
+			function run(){
+				document.getElementById('res').value = "";
+				var nums = document.getElementById('nums').value.split(/[, \n]+/);
+				var n = nums.map(v => parseInt(v, 10));
+				var tries = parseInt(document.getElementById('tries').value, 10);
+				
+				document.getElementById('res').value = calc(n, tries)[0];
+			}
+		</script>
+		<h1>Geothmetic Meandian</h1>
+		<p>Enter your numbers below, and this will calculate the geothmetic meandian of those numbers</p>
+		<textarea id="nums" rows="10" cols="40">1,1,2,3,5</textarea>
+		<br/>
+		<label for="tries">Tries: </label>
+		<input id="tries" type="number" value="1000"/>
+		<br/>
+		<button onclick="run()">Calculate</button>
+		<br/>
+		<label for="res">Answer: </label>
+		<input id="res" type="number" readonly/>
+	</body>
+</html>
